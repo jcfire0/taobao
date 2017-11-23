@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
-import time
 import os
 from bs4 import BeautifulSoup
 import re
@@ -22,7 +21,7 @@ bro.find_element_by_id('J_SubmitStatic').click()
 handle=bro.current_window_handle
 bro.find_element_by_id('J_MiniCart').click()
 handle=bro.current_window_handle
-html=bro.page_source
+html=bro.page_source           #这几行代码是通过selenium模拟鼠标和键盘的操作来实现进入自己的购物车界面
 soup=BeautifulSoup(html,'html.parser')
 r=soup.find_all('a',class_="item-title J_MakePoint")
 mi=str(r)
@@ -36,7 +35,7 @@ j=soup.find_all('em',class_="J_Price price-now")
 ji=str(j)
 jia=re.compile('>(.*?)</em>')
 jiage=re.findall(jia,ji)
-k=len(minzi)
+k=len(minzi)            #通过美味汤解析购物车网页，把商品的名字，原价，现价等数据采集下来
 
 ominzi=[]
 ojiujia=[]
@@ -46,4 +45,4 @@ for i in range(0,k):
     ojiujia.append(jiujia[k-i-1])
     ojiage.append(jiage[k-i-1])
     print (str(i)+'    '+ominzi[i].decode('unicode_escape')+'   '+u'原价:'+ojiujia[i].decode('unicode_escape')+'   '+u'现价:'+ojiage[i].decode('unicode_escape'))
-
+#因为购物车爬下来最新添加的是第一个，这几行代码是将顺序反一下，让最新添加的商品放在后面
