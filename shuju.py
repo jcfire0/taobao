@@ -47,7 +47,7 @@ def shuju(m):
         write.writerow([date]+m)
     f.close()
 
-def main():
+class main():
     m=xingxi(ojiage,k)
     biaogetou(k)
     shuju(m)
