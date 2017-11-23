@@ -12,7 +12,7 @@ def xingxi(ojiage,k):
         b=str(jiage[i])
         p=re.compile(r'\\utffe5')
         q=re.sub(p,'',b)
-        m.append(q)
+        m.append(q)        #把价格里面的人民币符号去掉
 
 
 def biaogetou(k):
@@ -27,7 +27,7 @@ def biaogetou(k):
                         p=raw_input(u'请按照给出的顺序输入商品名称:')
                         a.append(p)
                 write.writerow(a)
-        f.close()
+        f.close()                  #第一次爬的话手动命名商品，作为CSV表格的第一行
     else:
         with open('taobao.csv','rb') as f:
             reader=csv.reader(f)
@@ -37,7 +37,8 @@ def biaogetou(k):
                     p=len(row)
             if p!=k+1:
                 l=k+1-p
-                print u'请手动到表格里添加后'+str(l)+u'项商品名称'
+                print u'请手动到表格里添加后'+str(l)+u'项商品名称'      #判断是否有新加入的商品，并提示去表格加名称，本来是想编程搞定的，
+                                                                   #但是CSV模块功能实在有限,尝试用了pandas模块，不过还是太麻烦
         
         
 def shuju(m):
@@ -45,7 +46,7 @@ def shuju(m):
     with open('taobao.csv','ab') as f:
         write=csv.writer(f)
         write.writerow([date]+m)
-    f.close()
+    f.close()                              #将时间以及商品价格写入
 
 class main():
     m=xingxi(ojiage,k)
